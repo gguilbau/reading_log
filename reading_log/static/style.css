@@ -2,3 +2,15 @@
     color:black;
     background-color: rgb(80, 160, 160);
 }
+.login-panel {
+    color:black;
+    text-align: right;
+}
+.create-account {
+    color:blue;
+    text-align:center;
+}
+.error-message {
+    color:darkred;
+    text-align:center;
+}

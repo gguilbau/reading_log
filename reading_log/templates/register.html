@@ -1,0 +1,12 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    {% include "components/site_header.html" %}
+    <body>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Create account</button>
+        </form>
+    </body>
+</html>

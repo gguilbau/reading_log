@@ -1,0 +1,62 @@
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <title>Reading Log</title>
+</head>
+<header>
+  <div class="row">
+    <div class="jumbotron main-heading col-7 offset-1">
+      <h1>Reading Log</h1>
+    </div>
+    <div class="login-panel col-3">
+      {% if user.is_authenticated %}
+      <div>User: <strong>{{ user.get_username }}</strong></div><br>
+
+      <form method="post" action="{% url 'logout' %}?next={{ request.path }}">
+        {% csrf_token %}
+        <button type="submit">Log out</button>
+      </form>
+      {% else %}
+      <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+
+        <div>
+          <label for="id_username">Username</label>
+          <input type="text" name="username" id="id_username" required>
+        </div>
+        <div>
+          <label for="id_user_password">Password</label>
+          <input type="password" name="password" id="id_user_password" required>
+        </div>
+        <div>
+          <label for="remember_me_checkbox">Remember me</label>
+          <input type="checkbox" name="remember_me_checkbox">
+        </div>
+
+        <!-- Store current URL so login doesn't send user elsewhere -->
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+
+        <button type="submit">Log in</button>
+      </form>
+
+      <!-- Login errors -->
+      <div class="error-message">
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+      </div>
+
+      <!-- Account creation url -->
+      <div class="create-account">
+        <a href="{% url 'register' %}">Create an account</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</header>
