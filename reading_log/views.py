@@ -1,7 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
+from .forms import BookReadForm
+from .models import BookRead
 
 # Main page shows reading list..
 def index(request):
@@ -45,3 +48,31 @@ def register(request):
 
     # Pass form into template for rendering (i didn't bother styling it for this assignment..)
     return render(request, "register.html", {"form": form})
+
+# Adding a book requires login
+@login_required
+def add_book(request):
+
+    # User tried to submit a book read..
+    if request.method == "POST":
+        form = BookReadForm(request.POST)
+        if form.is_valid():
+
+            # Build class, attach user, save to db
+            BookRead = form.save(commit=False)
+            BookRead.user = request.user
+            BookRead.save()
+
+            # Send back to main index..
+            return redirect("index")
+
+        else:
+            # Invalid form..
+            messages.error(request, "Invalid form fill..")
+
+    # Create empty form if not..
+    else:
+        form = BookReadForm()
+
+    # Load page again regardless..
+    return render(request, "add_book.html", {"form": form})

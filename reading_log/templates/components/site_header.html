@@ -16,7 +16,7 @@
       {% if user.is_authenticated %}
       <div>User: <strong>{{ user.get_username }}</strong></div><br>
 
-      <form method="post" action="{% url 'logout' %}?next={{ request.path }}">
+      <form method="post" action="{% url 'logout' %}">
         {% csrf_token %}
         <button type="submit">Log out</button>
       </form>

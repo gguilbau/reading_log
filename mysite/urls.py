@@ -22,7 +22,8 @@ from reading_log import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("login/", views.login_view, name="login"),
-    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path("logout/", auth_views.LogoutView.as_view(next_page="index"), name="logout"),
     path("register/", views.register, name="register"),
+    path("add_book/", views.add_book, name="add_book"),
     path('', views.index, name="index")
 ]
