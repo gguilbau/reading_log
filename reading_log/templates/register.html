@@ -2,10 +2,18 @@
 <html lang="en">
     {% include "components/site_header.html" %}
     <body>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Create account</button>
-        </form>
+        {% include "components/navbar.html" %}
+        <div class="row">
+            <div class="col-7 offset-1">
+                <h1>Create Account</h1>
+                <div class="center-form">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Create account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

@@ -2,6 +2,34 @@
 <html lang="en">
     {% include "components/site_header.html" %}
     <body>
-        Hello world..
+        {% include "components/navbar.html" %}
+        <div class="read-list col-7 offset-1">
+            <h1>Recent Reads</h1>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Title</th>
+                        <th>Length</th>
+                        <th>Author</th>
+                        <th>Time</th>
+                    </tr>
+
+                    {% for entry in entries %}
+                        <tr>
+                            <td>{{ entry.user.username }}</td>
+                            <td>{{ entry.title }}</td>
+                            <td>{{ entry.length }}</td>
+                            <td>{{ entry.author }}</td>
+
+                            <!-- Fill in time using browser to localize it.. I used middleware last time, but don't have time to set that up atm..-->
+                            <td><script>
+                                document.currentScript.parentElement.textContent = new Date("{{ entry.read_time|date:'c' }}").toLocaleString();
+                            </script></td>
+                        </tr>
+                    {% endfor %}
+                </thead>
+            </table>
+        </div>
     </body>
 </html>

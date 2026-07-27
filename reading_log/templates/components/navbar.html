@@ -1,0 +1,7 @@
+<div class="row">
+    <div class="col-2 offset-1"><a href="/index" class="navi-button">Recent Reads</a></div>
+    <div class="col-2 offset-1"><a href="/top_readers" class="navi-button">Top Readers</a></div>    
+    {% if user.is_authenticated %}
+        <div class="col-2 offset-1"><a href="/add_book" class="navi-button">Add Book</a></div>
+    {% endif %}
+</div>

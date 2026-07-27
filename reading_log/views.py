@@ -8,7 +8,30 @@ from .models import BookRead
 
 # Main page shows reading list..
 def index(request):
-    return render(request, "index.html", {})
+    # Get recent reads in descending order..
+    entries = BookRead.objects.all().order_by("-read_time")
+    return render(request, "index.html", {
+        "entries": entries[:10]
+    })
+
+# Main page shows reading list..
+def top_readers(request):
+    # Get all recent reads..
+    entries = BookRead.objects.all()
+
+    # Translate all entries into dictionary by user
+    reader_totals = {}
+    for entry in entries:
+        reader = reader_totals.setdefault(entry.user, {"user": entry.user, "book_count": 0, "page_count": 0})
+        reader["book_count"] += 1
+        reader["page_count"] += entry.length
+
+    # Sort by descending page count
+    reader_totals = sorted(reader_totals.values(), key=lambda f: f["page_count"], reverse=True)
+
+    return render(request, "top_readers.html", {
+        "entries": reader_totals
+    })
 
 # Login view (POSTed from the account panel in header)
 def login_view(request):

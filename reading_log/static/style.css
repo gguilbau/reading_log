@@ -14,3 +14,42 @@
     color:darkred;
     text-align:center;
 }
+.navi-button {
+    display: block;
+    background: rgb(80, 160, 160);
+    color: black;
+    text-align: center;
+    font-weight: bold;
+    border: 9px solid black;
+    border-radius: 8px;
+    padding: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.navi-button:hover {
+    background-color: rgb(120, 240, 240);
+}
+h1 {
+    text-align: center;
+}
+.data-table {
+    margin: 2rem auto;
+    border-collapse: collapse;
+    font-family: inherit;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.data-table th {
+    background-color: rgb(80, 160, 160);
+    color: black;
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 2px solid rgb(50, 110, 110);
+}
+.data-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #ddd;
+}
+.center-form {
+    width: 600px;
+    margin: 0 auto;
+}
